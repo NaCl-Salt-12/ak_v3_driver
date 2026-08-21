@@ -71,7 +71,7 @@ ak_v3_driver/
 ├── src/
 │   ├── can_socket.cpp
 │   ├── protocol.cpp
-│   ├── motor_limits.cpp         # <-- edit this with your real pole_pairs/gear_ratio
+│   ├── motor_limits.cpp
 │   ├── motor_driver_node.cpp
 │   └── motor_driver_node_main.cpp
 ├── msg/
@@ -132,22 +132,20 @@ Before a motor is usable with this driver, it must be calibrated once — this i
 
 ⚠️ Both identification steps must be run under no-load conditions (motor disconnected from any mechanical load) or the identified parameters will be wrong and the motor may be damaged. Repeated encoder identification runs can heat the motor significantly.
 
-This is unrelated to, and does not fill in, the `pole_pairs`/`gear_ratio` placeholders described [below](#important-pole_pairs-and-gear_ratio-placeholders) — those aren't part of CubeMarsTool's calibration and must still be set by hand in `motor_limits.cpp`.
 
 ## Quick Start
 
 1. Bring up the CAN interface (see above).
 2. Copy/edit `config/motor.yaml` for your motor (`can_id`, `joint_name`, `motor_type`, etc.).
-3. **Fill in real `pole_pairs` / `gear_ratio` values** in `src/motor_limits.cpp` for your motor_type (see [warning below](#important-pole_pairs-and-gear_ratio-placeholders)) and rebuild.
-4. Run the node:
+3. Run the node:
    ```bash
    ros2 run ak_v3_driver motor_driver_node --ros-args --params-file config/motor.yaml
    ```
-5. Watch feedback:
+4. Watch feedback:
    ```bash
    ros2 topic echo /ak_v3_driver_node/state
    ```
-6. Send a command, e.g. a small current command:
+5. Send a command, e.g. a small current command:
    ```bash
    ros2 topic pub --once /ak_v3_driver_node/cmd ak_v3_driver/msg/MotorCommand "{mode: 1, current: 0.5}"
    ```
@@ -376,7 +374,7 @@ All MIT-mode inputs are clamped to range before packing — out-of-range values 
 
 - Public API (`MotorCommand`, `MotorState`) is entirely SI: radians, rad/s, N·m, amps.
 - The underlying VESC-style wire protocol uses **degrees** for position and **ERPM** (electrical RPM) for velocity; conversion happens at the CAN boundary inside the node.
-- `rad/s ↔ ERPM` conversion depends on `pole_pairs` and `gear_ratio` (see [placeholder warning](#important-pole_pairs-and-gear_ratio-placeholders)):
+- `rad/s ↔ ERPM` conversion depends on `pole_pairs` and `gear_ratio
 
   ```
   output_rpm = rad_s * 60 / (2π)
