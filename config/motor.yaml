@@ -1,0 +1,21 @@
+# Example parameter file for ONE motor instance. Copy/override per joint --
+# see launch/ak_v3_driver.launch.py for running several of these together.
+#
+# NOTE: pole_pairs and gear_ratio are NOT set here -- they live in
+# src/motor_limits.cpp, keyed by motor_type, alongside that model's
+# velocity/torque limits. Edit motor_limits.cpp with your real hardware
+# values (it currently ships with 1.0/1.0 placeholders for every model).
+ak_v3_driver_node:
+  ros__parameters:
+    can_interface: "can0"
+    bitrate: 1000000          # informational only; bring the interface up
+                               # externally, e.g.:
+                               #   sudo ip link set can0 up type can bitrate 1000000
+    can_id: 1                 # this motor's driver ID, 0-255
+    joint_name: "joint1"
+    motor_type: "AK80-9"      # must match a name in motor_limits.cpp,
+                               # e.g. AK10-9, AK60-6, AK60-39, AK70-9,
+                               # AK80-8, AK80-9, AKE60-8, AKE80-8, AKE90-8,
+                               # AKH70-16, AKH70-48
+    invert_direction: false
+    feedback_hz: 100

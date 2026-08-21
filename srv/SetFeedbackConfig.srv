@@ -1,0 +1,9 @@
+# Configures optional feedback frames (manual section 4.1.9).
+# NOTE: this writes to the motor's flash memory -- call once at startup,
+# not repeatedly.
+bool add_extended_position_frame   # enable the high-resolution 0x2A frame
+bool single_turn_mode                # report position as 0-360 deg instead
+                                      # of multi-turn
+---
+bool success
+string message

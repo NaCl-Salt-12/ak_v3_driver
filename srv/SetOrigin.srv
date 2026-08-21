@@ -1,0 +1,6 @@
+# Sets the motor's zero position (manual section 4.1.6).
+bool permanent   # false = temporary (erased on power loss)
+                  # true  = permanent (written to flash -- don't call often)
+---
+bool success
+string message
