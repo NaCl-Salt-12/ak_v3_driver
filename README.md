@@ -8,6 +8,12 @@ Supported motor models (from the manual's parameter table, manual §4.2): `AK10-
 
 > **Before first use:** each motor must be calibrated once (motor + encoder parameter identification) using CubeMars's own **CubeMarsTool** upper-computer application over a serial **R-Link** adapter — this ROS package does not perform calibration. See [Motor Calibration (Prerequisite)](#motor-calibration-prerequisite).
 
+>[!Note]
+> This driver uses a fire-and-forget model of communication not fire-and-hold. Its behavior is as follows:
+> 1.The ROS client publishes a MotorCommand message.
+> 2.The ROS driver node fires once, packs it into a CAN frame, sends it.
+> 3.Nothing happens again until the next message arrives on ~/cmd.
+
 ---
 
 ## Table of Contents
