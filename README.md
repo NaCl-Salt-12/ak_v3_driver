@@ -160,10 +160,9 @@ One instance == one physical motor. On construction it:
 
 1. Declares and validates parameters (fails fast on bad `can_id`, empty `joint_name`/`motor_type`).
 2. Looks up `motor_type` in the model spec table (`motor_limits.cpp`); throws if unrecognized.
-3. Warns (but does not fail) if the resolved spec still has placeholder `pole_pairs`/`gear_ratio` (1.0/1.0).
-4. Opens and binds the SocketCAN socket for `can_interface`; throws `CanSocketError` if that fails.
-5. Creates the `~/cmd` subscription, `~/state`/`~/diagnostics` publishers, and the three services.
-6. Starts a dedicated CAN RX thread (polls with a 50 ms timeout) and a 200 Hz wall timer that drains the RX thread's queues and publishes on the executor thread.
+3. Opens and binds the SocketCAN socket for `can_interface`; throws `CanSocketError` if that fails.
+4. Creates the `~/cmd` subscription, `~/state`/`~/diagnostics` publishers, and the three services.
+5. Starts a dedicated CAN RX thread (polls with a 50 ms timeout) and a 200 Hz wall timer that drains the RX thread's queues and publishes on the executor thread.
 
 If construction throws (bad params, unreachable CAN interface, unknown motor type), `motor_driver_node_main.cpp` logs the error at `FATAL` and exits with status 1 rather than spinning a half-initialized node.
 
