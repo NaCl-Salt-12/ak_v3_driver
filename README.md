@@ -424,7 +424,7 @@ ros2 launch ak_v3_driver ak_v3_driver.launch.py
 
 The table in `src/motor_limits.cpp` currently only has a few of the existing motor models. To add a model not in the table at all, add a new entry following the same `{kv, kt, v_min, v_max, t_min, t_max, pole_pairs, gear_ratio}` shape, sourced from manual §4.2. An unrecognized `motor_type` string is treated as a configuration error at startup — the node throws rather than silently falling back to a default spec.
 
-Warning the Kt values listed in the specifications on the website are not accurate contact CubeMars or see AK-V3 documentation for accurate Kt values.
+Warning: The Kt values listed on the individual product pages of the CubeMars website are inaccurate. Please contact CubeMars directly or consult the AK-V3 documentation for correct Kt values.
 
 ## Architecture Notes
 
