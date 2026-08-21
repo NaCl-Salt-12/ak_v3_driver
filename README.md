@@ -10,6 +10,7 @@ Supported motor models (from the manual's parameter table, manual §4.2): `AK10-
 
 >[!Note]
 > This driver uses a fire-and-forget model of communication not fire-and-hold. Its behavior is as follows:
+>
 > 1.The ROS client publishes a MotorCommand message.
 > 2.The ROS driver node fires once, packs it into a CAN frame, sends it.
 > 3.Nothing happens again until the next message arrives on ~/cmd.
