@@ -4,7 +4,7 @@ A ROS 2 driver for [CubeMars](https://www.cubemars.com/) AK-V3 series servo moto
 
 **One node instance controls exactly one motor.** For multiple motors — even on the same physical CAN bus — you run multiple node instances, each filtering to its own `can_id` in software. See [Multiple Motors](#multiple-motors--launch-file) below.
 
-Supported motor models (from the manual's parameter table, manual §4.2): `AK10-9`, `AK60-6`, `AK60-39`, `AK70-9`, `AK80-8`, `AK80-9`. A few more model entries (`AKE60-8`, `AKE80-8`, `AKE90-8`, `AKH70-16`, `AKH70-48`) exist in the source table but are currently commented out — see [Adding / Enabling a Motor Model](#adding--enabling-a-motor-model).
+Supported motor models (from the manual's parameter table, manual §4.2): `AK10-9`, `AK60-6`, `AK60-39`, `AK70-9`, `AK80-8`, `AK80-9`. Additional CubeMars AK-V3 actuators exists to add — see [Adding a Motor Model](#adding-a-motor-model).
 
 > **Before first use:** each motor must be calibrated once (motor + encoder parameter identification) using CubeMars's own **CubeMarsTool** upper-computer application over a serial **R-Link** adapter — this ROS package does not perform calibration. See [Motor Calibration (Prerequisite)](#motor-calibration-prerequisite).
 
@@ -33,7 +33,7 @@ Supported motor models (from the manual's parameter table, manual §4.2): `AK10-
 - [Control Modes Reference](#control-modes-reference)
 - [Units and Sign Conventions](#units-and-sign-conventions)
 - [Multiple Motors / Launch File](#multiple-motors--launch-file)
-- [Adding a Motor Model](#adding--enabling-a-motor-model)
+- [Adding a Motor Model](#adding-a-motor-model)
 - [Architecture Notes](#architecture-notes)
 - [Driver Board Hardware Reference](#driver-board-hardware-reference)
 - [Troubleshooting](#troubleshooting)
